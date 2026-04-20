@@ -1,0 +1,651 @@
+/* Reset, helps include padding and margin inside a borders calculations */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body */
+body {
+  background: #b0b8c8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem 0.5rem 3rem;
+  font-family: 'Patrick Hand', cursive;
+}
+
+@media (min-width: 600px) {
+  body {
+    padding: 2.5rem 1rem 4rem;
+  }
+}
+
+/* Notebook style */
+.notebook {
+  width: 100%;
+  background: #f8f8f6;
+  border-radius: 4px 8px 8px 4px;
+  box-shadow:
+    -4px 0 0 #ccc,
+    -8px 0 0 #bbb,
+    0 8px 40px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: visible;
+}
+
+@media (min-width: 700px) {
+  .notebook {
+    width: 680px;
+  }
+}
+
+@media (min-width: 960px) {
+  .notebook {
+    width: 900px;
+  }
+}
+
+/* Notebook rings */
+.spirals {
+  position: absolute;
+  left: -18px;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.spiral-loop {
+  width: 22px;
+  height: 26px;
+  border: 3px solid #888888;
+  border-radius: 50%;
+  background: transparent;
+  flex-shrink: 0;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  margin: 3px 0;
+}
+
+/* Holes */
+.holes {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 60px 0;
+  z-index: 5;
+}
+
+.hole {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #b0b8c8;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 2px #a8afc0;
+}
+
+/* Notebook inner */
+.notebook-inner {
+  min-height: 100%;
+  padding: 0 0 3rem;
+  background-image:
+    /* Red margin line on page, only 1.5px thick */
+    linear-gradient(
+      to right,
+      transparent 60px,
+      rgba(210, 80, 70, 0.55) 60px,
+      rgba(210, 80, 70, 0.55) 61.5px,
+      transparent 61.5px
+    ),
+    /* Blue lines on the page making it look like a sheet of paper */
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 31px,
+      rgba(130, 160, 210, 0.45) 31px,
+      rgba(130, 160, 210, 0.45) 32px
+    );
+  background-attachment: local;
+  border-radius: 4px 8px 8px 4px;
+}
+
+/* Top of notebook */
+.cover-strip {
+  background: #1e3a5f;
+  padding: 18px 20px 16px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 600px) {
+  .cover-strip {
+    padding: 22px 40px 20px 80px;
+  }
+}
+
+/* Creats the repeated diagonal striped pattern on header */
+.cover-strip::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 8px,
+    rgba(255, 255, 255, 0.03) 8px,
+    rgba(255, 255, 255, 0.03) 16px
+  );
+}
+
+.cover-strip h1 {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.8rem;
+  color: #ffffff;
+  line-height: 1;
+  position: relative;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 600px) {
+  .cover-strip h1 {
+    font-size: 2.4rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .cover-strip h1 {
+    font-size: 2.8rem;
+  }
+}
+
+.cover-strip .year-tag {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 0.85rem;
+  color: #ffd166;
+  letter-spacing: 0.1em;
+  position: relative;
+}
+
+/* Section label, meant to look kinda like a sticky note */
+.section-label {
+  display: inline-block;
+  background: #fff9c4;
+  color: #1a1a2e;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1rem;
+  padding: 6px 18px 6px 14px;
+  margin: 20px 0 4px 65px;
+  transform: rotate(-0.8deg);
+  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+@media (min-width: 600px) {
+  .section-label {
+    font-size: 1.1rem;
+    margin-left: 80px;
+  }
+}
+
+.section-label::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: rgba(255, 200, 50, 0.6);
+}
+
+/* Grid for polaroids */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.8rem 1.2rem;
+  padding: 1.5rem 1rem 2rem 65px;
+}
+
+@media (min-width: 600px) {
+  .grid {
+    justify-content: flex-start;
+    padding: 1.5rem 1.5rem 2rem 80px;
+    gap: 2rem 1.8rem;
+  }
+}
+
+/* Card wrap for flipping the cards */
+
+/* Resets the original button styling initially */
+.card-wrap {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Visible focus for keyboard users */
+.card-wrap:focus {
+  outline: 3px solid blue;
+  outline-offset: 4px;
+}
+
+.card-wrap {
+  width: 150px;
+  height: 210px;
+  perspective: 900px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+@media (min-width: 480px) {
+  .card-wrap {
+    width: 170px;
+    height: 240px;
+  }
+}
+
+@media (min-width: 700px) {
+  .card-wrap {
+    width: 200px;
+    height: 270px;
+  }
+}
+
+/* Different tilts */
+.card-wrap:nth-child(1) { transform: rotate(-2deg); }
+.card-wrap:nth-child(2) { transform: rotate(2.5deg); }
+.card-wrap:nth-child(3) { transform: rotate(-1deg); }
+.card-wrap:nth-child(4) { transform: rotate(3deg); }
+.card-wrap:nth-child(5) { transform: rotate(-1.8deg); }
+.card-wrap:nth-child(6) { transform: rotate(1.5deg); }
+.card-wrap:nth-child(7) { transform: rotate(-2.5deg); }
+.card-wrap:nth-child(8) { transform: rotate(2deg); }
+.card-wrap:nth-child(9)  { transform: rotate(-1deg); }
+.card-wrap:nth-child(10) { transform: rotate(3deg); }
+.card-wrap:nth-child(11) { transform: rotate(-2deg); }
+
+.card-wrap:hover {
+  transform: rotate(0deg) scale(1.07) translateY(-4px);
+  z-index: 30;
+}
+
+/* Tape strips on polaroids */
+.card-wrap::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 50px;
+  height: 18px;
+  background: rgba(255, 220, 100, 0.6);
+  z-index: 10;
+  border-radius: 1px;
+}
+
+.card-wrap:nth-child(2n)::before {
+  background: rgba(160, 210, 180, 0.65);
+  transform: translateX(-50%) rotate(1deg);
+}
+
+.card-wrap:nth-child(3n)::before {
+  background: rgba(200, 160, 210, 0.6);
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+.card-wrap:nth-child(4n)::before {
+  background: rgba(255, 190, 140, 0.6);
+  transform: translateX(-50%) rotate(0.5deg);
+}
+
+/* Flip inner */
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.1, 0.3, 1);
+}
+
+.card-wrap.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Shared styles for both front and back */
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #ffffff;
+  border-radius: 2px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Front of polaroid */
+.card-front {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 8px 0;
+}
+
+.card-front .photo {
+  flex: 1;
+  background: #d0d4dc center / cover no-repeat;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Placeholder camera emoji when no image is set */
+.card-front .photo::after {
+  content: '📷';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  opacity: 0.3;
+}
+
+.card-front .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.card-front .caption {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px 6px;
+  font-family: 'Architects Daughter', cursive;
+  font-size: 0.72rem;
+  color: #444444;
+  line-height: 1.3;
+}
+
+@media (min-width: 700px) {
+  .card-front .caption {
+    font-size: 0.82rem;
+    min-height: 54px;
+  }
+}
+
+/* Back of polaroid */
+.card-back {
+  transform: rotateY(180deg);
+  padding: 10px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 23px,
+    rgba(130, 160, 210, 0.4) 23px,
+    rgba(130, 160, 210, 0.4) 24px
+  );
+}
+
+.card-back .person-name {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1rem;
+  color: #1a3a8f;
+  line-height: 1.2;
+  margin-bottom: 5px;
+  border-bottom: 2px solid rgba(180, 60, 60, 0.4);
+  padding-bottom: 3px;
+}
+
+@media (min-width: 700px) {
+  .card-back .person-name {
+    font-size: 1.2rem;
+  }
+}
+
+.card-back .info-item {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0;
+}
+
+.card-back .info-item .lbl {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #b91c1c;
+  line-height: 1;
+}
+
+.card-back .info-item .val {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 0.78rem;
+  color: #1a3a8f;
+  line-height: 1.35;
+}
+
+@media (min-width: 700px) {
+  .card-back .info-item .lbl { font-size: .7rem; }
+  .card-back .info-item .val { font-size: 0.8rem; }
+}
+
+.card-back .doodle-footer {
+  margin-top: auto;
+  text-align: right;
+  font-size: 0.7rem;
+  color: #bbbbbb;
+  font-family: 'Patrick Hand', cursive;
+}
+
+/* Footer */
+.notebook-footer {
+  padding: 12px 0 8px 65px;
+  font-family: 'Architects Daughter', cursive;
+  font-size: 0.78rem;
+  color: #aaaaaa;
+  border-top: 1px solid rgba(130, 160, 210, 0.45);
+  margin: 0 14px;
+}
+
+@media (min-width: 600px) {
+  .notebook-footer {
+    padding-left: 80px;
+  }
+}
+
+/* Stop all animations for prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  /* Remove all tilts */
+  .card-wrap:nth-child(1),  .card-wrap:nth-child(2),
+  .card-wrap:nth-child(3),  .card-wrap:nth-child(4),
+  .card-wrap:nth-child(5),  .card-wrap:nth-child(6),
+  .card-wrap:nth-child(7),  .card-wrap:nth-child(8),
+  .card-wrap:nth-child(9),  .card-wrap:nth-child(10),
+  .card-wrap:nth-child(11) {
+    transform: none;
+  }
+
+  /* Disable hover lift */
+  .card-wrap:hover {
+    transform: none;
+  }
+
+  /* Disable flip transition */
+  .card-inner {
+    transition: none;
+  }
+
+  /* Stop the inner container from rotating — this was mirroring everything */
+  .card-wrap.flipped .card-inner {
+    transform: none;
+  }
+
+  /* Reset transforms and backface on both faces */
+  .card-front,
+  .card-back {
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+
+  /* Remove the base 180deg pre-rotation from the back */
+  .card-back {
+    transform: none;
+    display: none;
+  }
+
+  .card-front {
+    opacity: 1;
+    transition: none;
+  }
+
+  /* When flipped: swap visibility */
+  .card-wrap.flipped .card-front {
+    display: none;
+    opacity: 0;
+    transition: none;
+  }
+
+  .card-wrap.flipped .card-back {
+    display: flex;
+    transform: none;
+  }
+}
+ 
+/* Change color depending on users preferred color scheme */
+@media (prefers-color-scheme: dark) {
+ 
+  /* Page background */
+  body {
+    background: #1a1f2e;
+  }
+ 
+  /* Notebook shell */
+  .notebook {
+    background: #23293a;
+    box-shadow:
+      -4px 0 0 #111,
+      -8px 0 0 #0a0a0a,
+      0 8px 40px rgba(0, 0, 0, 0.6);
+  }
+ 
+  /* Ruled lines, slightly brighter to show on dark background */
+  .notebook-inner {
+    background-image:
+      linear-gradient(
+        to right,
+        transparent 60px,
+        rgba(220, 100, 90, 0.5) 60px,
+        rgba(220, 100, 90, 0.5) 61.5px,
+        transparent 61.5px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 31px,
+        rgba(100, 130, 190, 0.4) 31px,
+        rgba(100, 130, 190, 0.4) 32px
+      );
+  }
+ 
+  /* Cover strip */
+  .cover-strip {
+    background: #111827;
+  }
+ 
+  /* Sticky note  */
+  .section-label {
+    background: #3a3510;
+    color: #e8e0c0;
+  }
+ 
+  /* Hole punches, match new dark page background */
+  .hole {
+    background: #1a1f2e;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 0 2px #111;
+  }
+ 
+  /* Card faces */
+  .card-front,
+  .card-back {
+    background: #2c3347;
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+ 
+  /* Caption text */
+  .card-front .caption {
+    color: #c8c8d8;
+  }
+ 
+  /* Card back ruled lines */
+  .card-back {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 23px,
+      rgba(100, 130, 190, 0.3) 23px,
+      rgba(100, 130, 190, 0.3) 24px
+    );
+  }
+ 
+  /* Person name */
+  .card-back .person-name {
+    color: #8ab4f8;
+  }
+ 
+  /* Info labels */
+  .card-back .info-item .lbl {
+    color: #f28b82;
+  }
+ 
+  /* Info values */
+  .card-back .info-item .val {
+    color: white;
+  }
+ 
+  /* Flip hint */
+  .card-back .doodle-footer {
+    color: #555577;
+  }
+ 
+  /* Footer */
+  .notebook-footer {
+    color: #666688;
+    border-top-color: rgba(100, 130, 190, 0.35);
+  }
+ 
+  /* Focus ring, brighter in dark mode so it's still visible */
+  .card-wrap:focus {
+    outline-color: #8ab4f8;
+  }
+}
+ 
