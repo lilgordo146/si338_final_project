@@ -1,0 +1,232 @@
+/* ── Min-width responsive breakpoints ────────────────────────────────────── */
+
+@media (min-width: 480px) {
+  .card-wrap {
+    width: 170px;
+    height: 240px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    padding: 2.5rem 1rem 4rem;
+  }
+
+  .cover-strip {
+    padding: 22px 40px 20px 80px;
+  }
+
+  .section-label {
+    margin-left: 80px;
+  }
+
+  .grid {
+    justify-content: flex-start;
+    padding: 1.5rem 1.5rem 2rem 80px;
+    gap: 2rem 1.8rem;
+  }
+
+  .notebook-footer {
+    padding-left: 80px;
+  }
+}
+
+@media (min-width: 700px) {
+  .notebook {
+    width: 680px;
+  }
+
+  .card-wrap {
+    width: 200px;
+    height: 270px;
+  }
+
+  .card-front .caption {
+    min-height: 54px;
+  }
+}
+
+@media (min-width: 960px) {
+  .notebook {
+    width: 900px;
+  }
+}
+
+
+/* ── Prefers reduced motion ──────────────────────────────────────────────── */
+
+/* Stop all animations for prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  /* Remove all tilts */
+  .card-wrap:nth-child(1),  .card-wrap:nth-child(2),
+  .card-wrap:nth-child(3),  .card-wrap:nth-child(4),
+  .card-wrap:nth-child(5),  .card-wrap:nth-child(6),
+  .card-wrap:nth-child(7),  .card-wrap:nth-child(8),
+  .card-wrap:nth-child(9),  .card-wrap:nth-child(10),
+  .card-wrap:nth-child(11) {
+    transform: none;
+  }
+
+  /* Disable hover lift */
+  .card-wrap:hover {
+    transform: none;
+  }
+
+  /* Disable flip transition */
+  .card-inner {
+    transition: none;
+  }
+
+  /* Stop the inner container from rotating — this was mirroring everything */
+  .card-wrap.flipped .card-inner {
+    transform: none;
+  }
+
+  /* Reset transforms and backface on both faces */
+  .card-front,
+  .card-back {
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+
+  /* Remove the base 180deg pre-rotation from the back */
+  .card-back {
+    transform: none;
+    display: none;
+  }
+
+  .card-front {
+    opacity: 1;
+    transition: none;
+  }
+
+  /* When flipped: swap visibility */
+  .card-wrap.flipped .card-front {
+    display: none;
+    opacity: 0;
+    transition: none;
+  }
+
+  .card-wrap.flipped .card-back {
+    display: flex;
+    transform: none;
+  }
+}
+
+
+/* ── Prefers color scheme: dark ──────────────────────────────────────────── */
+
+/* Change color depending on users preferred color scheme */
+@media (prefers-color-scheme: dark) {
+
+  /* Page background */
+  body {
+    background: #1a1f2e;
+  }
+
+  /* Notebook shell */
+  .notebook {
+    background: #23293a;
+    box-shadow:
+      -4px 0 0 #111,
+      -8px 0 0 #0a0a0a,
+      0 8px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Ruled lines, slightly brighter to show on dark background */
+  .notebook-inner {
+    background-image:
+      linear-gradient(
+        to right,
+        transparent 60px,
+        rgba(220, 100, 90, 0.5) 60px,
+        rgba(220, 100, 90, 0.5) 61.5px,
+        transparent 61.5px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 31px,
+        rgba(100, 130, 190, 0.4) 31px,
+        rgba(100, 130, 190, 0.4) 32px
+      );
+  }
+
+  /* Cover strip */
+  .cover-strip {
+    background: #111827;
+  }
+
+  /* Sticky note */
+  .section-label {
+    background: #3a3510;
+    color: #e8e0c0;
+  }
+
+  /* Hole punches, match new dark page background */
+  .hole {
+    background: #1a1f2e;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 0 2px #111;
+  }
+
+  /* Card faces */
+  .card-front,
+  .card-back {
+    background: #2c3347;
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Caption text */
+  .card-front .caption {
+    color: #c8c8d8;
+  }
+
+  /* Card back ruled lines */
+  .card-back {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 23px,
+      rgba(100, 130, 190, 0.3) 23px,
+      rgba(100, 130, 190, 0.3) 24px
+    );
+  }
+
+  /* Person name */
+  .card-back .person-name {
+    color: #8ab4f8;
+  }
+
+  /* Info labels */
+  .card-back .info-item .lbl {
+    color: #f28b82;
+  }
+
+  /* Info values */
+  .card-back .info-item .val {
+    color: white;
+  }
+
+  /* Flip hint */
+  .card-back .doodle-footer {
+    color: #555577;
+  }
+
+  /* Footer */
+  .notebook-footer {
+    color: #aaaaaa;
+    border-top-color: rgba(100, 130, 190, 0.35);
+  }
+
+  /* Focus ring, brighter in dark mode so it's still visible */
+  .card-wrap:focus {
+    outline-color: #8ab4f8;
+  }
+  /* Back to top background color */
+  nav a {
+    color: #aaaaaa;
+    }
+}
